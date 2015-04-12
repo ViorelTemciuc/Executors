@@ -1,0 +1,12 @@
+dialog = $("#statut_juridic" ).dialog({
+autoOpen: false,
+height: 300,
+width: 350,
+modal: true,
+buttons: {
+
+Cancel: function() {
+dialog.dialog( "close" );
+}
+}
+});

@@ -1,0 +1,4 @@
+var tipPersoaneStatutsource = new Array();
+tipPersoaneStatutsource[0]={html:"<div>Persoane Fizice</div>",title:"Persoane Fizice"};
+tipPersoaneStatutsource[1]={html:"<div>Persoane Juridice</div>",title:"Persoane Juridice"};
+

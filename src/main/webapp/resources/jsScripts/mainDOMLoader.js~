@@ -1,0 +1,15 @@
+ $(document).ready(function () {              
+               $("#debitor_input").jqxInput({placeHolder: "Introduceti debitor", height: 25, width: 250, minLength: 1 });
+               $("#reprezentant_debitor_input").jqxInput({placeHolder: "Introduceti reprezentant debitor", height: 25, width: 250, minLength: 1 });
+               $("#statut_juridic_debitor").jqxComboBox({ source: tipPersoaneStatutsource, selectedIndex: 0, width: '250', height: '25px'});
+               $("#statut_juridic_reprezentant_debitor").jqxComboBox({ source: tipPersoaneStatutsource, selectedIndex: 0, width: '250', height: '25px'});
+ 	       $("#reprezentant_debitor_checkbox").jqxCheckBox({ width: 120, height: 25, checked: false});
+               $("#reprezentant_debitor_checkbox").on('checked', function (event) {
+   $("#reprezentant_debitor").toggleClass("hidden",1000,"visible");
+});
+$("#reprezentant_debitor_checkbox").on('unchecked', function(event){
+   $("#reprezentant_debitor").toggleClass("visible",1000,"hidden");
+});
+	       $('#mainSplitter').jqxSplitter({ width: 850, height: 480, panels: [{ size: 350 }] });
+ 
+            });
