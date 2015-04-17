@@ -22,33 +22,35 @@
     <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxpanel.js"></script>
     <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxribbon.js"></script>
     <script type="text/javascript" src="resources/jsScripts/formModal.js"></script>
+     
 <!-- JQueryUI dependencies -->
     <link rel="stylesheet" href="resources/JqueryUI/jquery-ui.css">
     <script src="resources/JqueryUI/jquery-ui.js"></script>
 <!-- jsStaticSources -->
     
 
-	
+ 
 </head>
 <script>
 $(document).ready(
-		function() {
-			
-		$("#test").on("click",function(){
-			$.ajax({
-				url:"http://localhost:5080/executors/initPersonsAddForm?formType=privateForm",
-				success:function(form){
-					$("#wind").html(form);
-					 $.blockUI({ message: $('#PPForm') });
-					 generateForm();
-					 overrideSubmit();
-					;
-				}
-			});
-		});
-		});
+  function() {
+   
+  $("#test").on("click",function(){
+   $.ajax({
+    url:"http://localhost:5080/executors/initPersonsAddForm?formType=privateForm",
+    success:function(form){
+     $("#wind").html(form);
+      $.blockUI({ message: $('#PPForm') });
+      generateForm();
+      overrideSubmit();
+     ;
+    }
+   });
+  });
+  });
 </script>
 <body>
+
 <table style="width: 100%;height: 960px">
 <tr style="width: 100%;height: 100%">
 <td style="width: 100%;height: 100%">
@@ -61,7 +63,22 @@ $(document).ready(
 
 
 </td></tr>
-<tr  style="width: 100%;height: 600px"><td  style="width: 100%;height: 100%; border-top:1px solid black"></td></tr>
+<tr  style="width: 100%;height: 600px;border-top:1px solid black">
+<td>
+<table  style="width: 100%;height: 100%">
+<tr>
+<td  style="width: 65%;height: 100%" valign="top">
+<div id="solidarP" style="height:50%;position:relative;"></div>
+<div id="coP" style="position:relative;"></div>
+</td>
+<td  style="width: 35%;height: 100%; border-left:1px solid black" valign="top">
+<h1>Date despre persoana selectata:</h1>
+<div id="selectedPerson"></div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
 </table>
 </td>
 <td style="width: 20%;height: 100%; border-left:1px solid black;" valign="top">
@@ -69,18 +86,13 @@ $(document).ready(
 <div class="persons-menu">
 <p class="persons-menu-heading">Persoane</p>
 <ul class="persons-menu-class">
-<li class="persons-menu-item">
-<p class="persons-menu-link">
-Debitor
-</p>
-</li>
-<li class="persons-menu-item"><p class="persons-menu-link">Reprezentant Debitor</p></li>
-<li class="persons-menu-item"><p class="persons-menu-link">Creditor</p></li>
-<li class="persons-menu-item"><p class="persons-menu-link">Reprezentant Creditor</p></li>
+<li id="deb"class="persons-menu-item"><p class="persons-menu-link">Debitor</p></li>
+<li id="rdeb" class="persons-menu-item"><p class="persons-menu-link">Reprezentant Debitor</p></li>
+<li id="cred" class="persons-menu-item"><p class="persons-menu-link">Creditor</p></li>
+<li id="rcred" class="persons-menu-item"><p class="persons-menu-link">Reprezentant Creditor</p></li>
 </ul>
 </div>
 </div>
-<input type="button" id="test"/>
 
 </td>
 </tr>
@@ -88,9 +100,11 @@ Debitor
 </td>
 </tr>
 </table>
-<div id="wind"></div>
 
-<script type="text/javascript" src="resources/myJsWidgeds/formAddWidget.js"></script> 
+
+
 <script type="text/javascript" src="resources/myJsWidgeds/formSubmitFunctions.js"></script> 
+<script type="text/javascript" src="resources/myJsWidgeds/dataTableLoader.js"></script>
+<script type="text/javascript" src="resources/myJsWidgeds/personButtonsHandle.js"></script>
 
 </body></html>

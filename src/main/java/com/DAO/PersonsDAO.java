@@ -9,7 +9,7 @@ import com.entities.Persons;
 public interface PersonsDAO {
 //	public List<PersoanaFizica> getPersoaneFiziceByLastName(String lastname);
 //	public List<PersoanaFizica> getPersoaneFiziceByIDNP(Long idnp);
-//	public PersoanaFizica getPersoanaFizicaByIDNP(Integer idnp);
+	public Persons getPersonByIdnp(Long idnp);
 	public void addPrivatePerson(Persons person);
 	public void updatePersons(Persons p);
 	public void deletePersons(Persons p);

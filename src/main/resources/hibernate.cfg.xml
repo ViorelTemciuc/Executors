@@ -8,9 +8,14 @@
 	<session-factory>
 	<property name="hibernate.enable_lazy_load_no_trans">true</property>
 	    <mapping class="com.entities.Persons" />
+	    <mapping class="com.entities.SolidarDebtor" />
+	    <mapping class="com.entities.CoDebtor" />
+	    <mapping class="com.entities.SolidarCreditor" />
+	    <mapping class="com.entities.CoCreditor" />
+	    <mapping class="com.entities.Incheiere" />
+	    <mapping class="com.entities.Judecatorie" />
 	
-	  
-	   
+
 	</session-factory>
 
 </hibernate-configuration>

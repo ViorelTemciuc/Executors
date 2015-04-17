@@ -17,7 +17,7 @@ $("#"+id+" input[type='submit']").click(function(e){
 		$.ajax({
 			contentType: 'application/json',
 			type:"POST",
-			url:url+"?type="+subType,
+			url:urlAbs+url+"?type="+subType,
 			data:JSON.stringify(serializedData),
 			success:function(data){
 				alert(data);

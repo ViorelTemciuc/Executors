@@ -44,9 +44,7 @@ public class HomeController {
 	
 	@RequestMapping(value = { "/initPersonsAddForm" }, method = RequestMethod.GET)
 	public @ResponseBody String initPersonsAddForm(@RequestParam(value = "formType") String type){
-		
 			return FormFactory.generateForm(FormType.valueOf(type),context);			
-		
 }
 //	@RequestMapping(value = { "/personsJurAdd" }, method = RequestMethod.POST,headers = {"Content-type=application/json"})
 //	public @ResponseBody String insertNewJurPerson(@RequestBody PersoanaJuridica pj){
@@ -123,9 +121,7 @@ public class HomeController {
 //    }	
 	@RequestMapping(value = { "/" })
 	public String  index() {
-      
-				return "home";
- 
+		return "home";
 	}
 //	
  

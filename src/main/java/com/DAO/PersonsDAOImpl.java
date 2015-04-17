@@ -28,11 +28,11 @@ public class PersonsDAOImpl implements PersonsDAO {
 //				.createQuery("from PersoanaFizica where idnp like CONCAT(:pattern,'%')")
 //				.setParameter("pattern", idnp).list();
 //	}
-//	@Override
-//	public PersoanaFizica getPersoanaFizicaByIDNP(Integer idnp) {
-//		 return (PersoanaFizica) sessionFactory.getCurrentSession().load(
-//				PersoanaFizica.class, idnp);
-//	}
+	@Override
+	public Persons getPersonByIdnp(Long idnp) {
+		 return (Persons) sessionFactory.getCurrentSession().load(
+				Persons.class, idnp);
+	}
 
 	@Override
 	public void addPrivatePerson(Persons person) {

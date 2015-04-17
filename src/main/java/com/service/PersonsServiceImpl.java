@@ -16,7 +16,7 @@ import com.entities.Persons;
 public class PersonsServiceImpl implements PersonsService {
 
 	@Autowired
-	private PersonsDAO pfDAO;
+	private PersonsDAO personDAO;
 //	@Override
 //	 @Transactional
 //	 public List<PrivatePerson> getPersoaneFiziceByLastName(String lastname) {
@@ -32,23 +32,23 @@ public class PersonsServiceImpl implements PersonsService {
 	@Override
 	 @Transactional
 	public void addPerson(Persons person){
-	    pfDAO.addPrivatePerson(person);
+	    personDAO.addPrivatePerson(person);
 	}
 	@Override
 	@Transactional
 	public void updatePersons(Persons p){
-	    pfDAO.updatePersons(p);
+	    personDAO.updatePersons(p);
 	}
 	@Override
 	@Transactional
 	public void deletePersons(Persons p){
-	    pfDAO.deletePersons(p);
+	    personDAO.deletePersons(p);
 	}
-//	@Override
-//	@Transactional
-//	public PersoanaFizica getPersoanaFizicaByIDNP(Integer idnp) {
-//		return pfDAO.getPersoanaFizicaByIDNP(idnp);
-//	}
+	@Override
+	@Transactional
+	public Persons getPersonByIdnp(Long idnp) {
+		return personDAO.getPersonByIdnp(idnp);
+	}
 
 
 }

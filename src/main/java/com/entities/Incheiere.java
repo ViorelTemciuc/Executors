@@ -38,8 +38,6 @@ public class Incheiere {
 	private int nr_hotarire_executare;
 	private int nr_procedura_executare;
 	private String descriere_incheiere;
-//	private PersoanaFizica debitor;
-//	private PersoanaFizica creditor;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -94,19 +92,4 @@ public class Incheiere {
 	public void setDescriere_incheiere(String descriere_incheiere) {
 		this.descriere_incheiere = descriere_incheiere;
 	}
-//	public PersoanaFizica getDebitor() {
-//		return debitor;
-//	}
-//	public void setDebitor(PersoanaFizica debitor) {
-//		this.debitor = debitor;
-//	}
-//	public PersoanaFizica getCreditor() {
-//		return creditor;
-//	}
-//	public void setCreditor(PersoanaFizica creditor) {
-//		this.creditor = creditor;
-//	}
-	
-	
-
 }
