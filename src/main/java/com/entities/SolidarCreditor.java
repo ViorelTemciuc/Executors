@@ -9,13 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 
 
 @Entity
-@Table(name = "SolidarCreditor")
+@Table(name = "SolidarCreditor",
+uniqueConstraints=@UniqueConstraint(columnNames={"person_id","incheiere_id"}))
 public class SolidarCreditor {
 
 	public SolidarCreditor(){}

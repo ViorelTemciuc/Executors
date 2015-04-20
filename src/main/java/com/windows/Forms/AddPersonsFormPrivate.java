@@ -19,8 +19,8 @@ public class AddPersonsFormPrivate extends AddPersonsForm{
  
   
  public AddPersonsFormPrivate(){
-  this.legend="Adaugare Persona Fizica";
-  this.action="http://localhost:5080/executors/perssons/personsAdd";
+  this.legend="Adaugare Persoana Fizica";
+  this.action="/personsAdd";
   this.id="PPForm";
   widgetList o=widgetList.getInstance();
   o.emptyList();
@@ -51,8 +51,7 @@ public class AddPersonsFormPrivate extends AddPersonsForm{
   String form="<form  id='"+this.id+"'>";
   form+="<legend>"+this.legend+"</legend><fieldset>";
   form+=generate_textboxes();
-  form+=generate_checkbox();
-  form+="<div>"+generate_buttons()+"</div></fieldset>";
+  form+="<div id='groupButtons'>"+generate_buttons()+"</div></fieldset>";
   form+="</form>";
   AjaxFormSubmit submit=new AjaxFormSubmit(this.id, this.action);
   submit.setFunction();
@@ -61,7 +60,7 @@ public class AddPersonsFormPrivate extends AddPersonsForm{
  }
  private void generate_widget_file(ServletContext context){
   WriteJSFile jsfFile=new WriteJSFile();
-  WriteAddFormWidgets addForm=new WriteAddFormWidgets(jsfFile);
+  new WriteAddFormWidgets(jsfFile);
   String filePath=context.getRealPath("/")+"resources/myJsWidgeds/formAddWidget.js";
   jsfFile.widgetsChanged(filePath);
  }

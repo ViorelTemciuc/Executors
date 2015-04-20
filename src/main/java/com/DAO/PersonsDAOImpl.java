@@ -30,7 +30,7 @@ public class PersonsDAOImpl implements PersonsDAO {
 //	}
 	@Override
 	public Persons getPersonByIdnp(Long idnp) {
-		 return (Persons) sessionFactory.getCurrentSession().load(
+		 return (Persons) sessionFactory.getCurrentSession().get(
 				Persons.class, idnp);
 	}
 

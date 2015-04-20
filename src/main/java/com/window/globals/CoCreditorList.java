@@ -1,47 +1,23 @@
 package com.window.globals;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.entities.Persons;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class CoCreditorList extends AbstractCDClass{
+import com.service.CoCreditorService;
+
+
+@Component
+public class CoCreditorList {
 	
-	private volatile static CoCreditorList uniqueInstance;
-	List<Persons> coCreditor;
-	private CoCreditorList(){
-		this.coCreditor=new ArrayList<Persons>();
-	}
-    
-	public static CoCreditorList getInstance(){
-		if(uniqueInstance==null){
-			synchronized (CoCreditorList.class) {
-				if(uniqueInstance==null){
-					uniqueInstance=new CoCreditorList();
-				}
-			}
-		}
-		return uniqueInstance;
-	}
-
-	public List<Persons> getTor() {
-		return coCreditor;
-	}
-
-	public void addTor(Persons p) {
-		this.coCreditor.add(p);
-	}
-	public void editTor(Persons p,int index) {
-		
-			coCreditor.set(index, p);
+	@Autowired
+	private CoCreditorService coCreditorService;
+  
+	public List<?> getListByIncheiereId(int incId){
+		return coCreditorService.getAllCoCreditorsByIncheiere(incId);
 		
 	}
-	
-public void deleteTor(Persons p) {
-		
-		int i=coCreditor.indexOf(p);
-		coCreditor.remove(i);		
-	
-	}
 
+	
 }

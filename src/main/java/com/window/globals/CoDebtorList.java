@@ -1,45 +1,24 @@
 package com.window.globals;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.entities.Persons;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class CoDebtorList extends AbstractCDClass {
-	private volatile static CoDebtorList uniqueInstance;
-	List<Persons> coDebtor;
-	private CoDebtorList(){
-		this.coDebtor=new ArrayList<Persons>();
-	}
-    
-	public static CoDebtorList getInstance(){
-		if(uniqueInstance==null){
-			synchronized (CoDebtorList.class) {
-				if(uniqueInstance==null){
-					uniqueInstance=new CoDebtorList();
-				}
-			}
-		}
-		return uniqueInstance;
-	}
+import com.service.CoDebtorService;
 
-	public List<Persons> getTor() {
-		return coDebtor;
-	}
-
-	public void addTor(Persons list) {
-		this.coDebtor.add(list);
-	}
+@Component
+public class CoDebtorList {
 	
-	public void editTor(Persons p,int index) {
+	@Autowired
+	private CoDebtorService coDebtorService;
+  
+	public List<?> getListByIncheiereId(int incId){
+		return coDebtorService.getAllCoDebtorsByIncheiere(incId);
 		
-		coDebtor.set(index, p);		
-	
-}
-	public void deleteTor(Persons p) {
-		
-		int i=coDebtor.indexOf(p);
-		coDebtor.remove(i);		
-	
 	}
+
+	
+
+	
 }

@@ -1,45 +1,23 @@
 package com.window.globals;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import com.entities.Persons;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class SolidarCreditorList extends AbstractCDClass {
-	private volatile static SolidarCreditorList uniqueInstance;
-	List<Persons> solCreditor;
-	private SolidarCreditorList(){
-		this.solCreditor=new ArrayList<Persons>();
-	}
+import com.service.SolidarCreditorService;
+
+@Component
+public class SolidarCreditorList {
+
+	@Autowired
+	private SolidarCreditorService solidarCreditorService;
+	
     
-	public static SolidarCreditorList getInstance(){
-		if(uniqueInstance==null){
-			synchronized (SolidarCreditorList.class) {
-				if(uniqueInstance==null){
-					uniqueInstance=new SolidarCreditorList();
-				}
-			}
-		}
-		return uniqueInstance;
-	}
-
-	public List<Persons> getTor() {
-		return solCreditor;
-	}
-
-	public void addTor(Persons list) {
-		this.solCreditor.add(list);
-	}
+	 public List<?> getListByIncheiereId(int incId){
+		 return solidarCreditorService.getAllSolidarCreditorsByIncheiere(incId);
+	 }
 	
-	public void editTor(Persons p,int index) {
-		
-		solCreditor.set(index, p);		
 	
-}
-	public void deleteTor(Persons p) {
-		
-		int i=solCreditor.indexOf(p);
-		solCreditor.remove(i);		
-	
-	}
 }

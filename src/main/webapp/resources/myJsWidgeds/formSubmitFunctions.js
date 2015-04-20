@@ -8,19 +8,22 @@ $("#"+id+" input[type='submit']").click(function(e){
 		}
 		serializedData['idnp']=parseInt(serializedData['idnp']);
 		delete serializedData['type'];
-		var subType;
-		if(!$("#subType").checked)
-		subType="Solidar";
-		else
-		subType="Co";
-		subType+="Debtor";
+		var subType=GlobalPersonType.split("_")[0]+GlobalPersonSubType;
+		
 		$.ajax({
 			contentType: 'application/json',
 			type:"POST",
-			url:urlAbs+url+"?type="+subType,
+			url:urlPersons+url+"?type="+subType+"&incheiere_id=1",
 			data:JSON.stringify(serializedData),
-			success:function(data){
-				alert(data);
+			success:function(map){
+				if(map['duplicate']===null)
+				updateDataTables(map);
+				else{
+					$.getScript('resources/myJsWidgeds/duplicateHandling.js').done(function() {
+						construcDuplicateWindow(map['duplicate']);
+					});
+				}
+					
 			}
 		});
 	});

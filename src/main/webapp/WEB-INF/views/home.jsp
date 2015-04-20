@@ -21,6 +21,7 @@
     <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxcheckbox.js"></script>
     <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxpanel.js"></script>
     <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxbuttongroup.js"></script>
     <script type="text/javascript" src="resources/jsScripts/formModal.js"></script>
      
 <!-- JQueryUI dependencies -->
@@ -51,25 +52,25 @@ $(document).ready(
 </script>
 <body>
 
-<table style="width: 100%;height: 960px">
+<table style="width: 100%;height: 100%">
 <tr style="width: 100%;height: 100%">
 <td style="width: 100%;height: 100%">
 <table style="width: 100%;height: 100%">
 <tr style="width: 100%;height: 100%">
 <td style="width: 80%;height: 100%">
 <table  style="width: 100%;height: 100%">
-<tr  style="width: 100%;height: 300px"><td  style="width: 100%;height: 100%">
+<tr  style="width: 100%"><td  style="width: 100%;height: 30%">
 
 
 
 </td></tr>
-<tr  style="width: 100%;height: 600px;border-top:1px solid black">
-<td>
+<tr  style="width: 100%;border-top:1px solid black">
+<td style="width: 100%;height: 60%">
 <table  style="width: 100%;height: 100%">
 <tr>
 <td  style="width: 65%;height: 100%" valign="top">
-<div id="solidarP" style="height:50%;position:relative;"></div>
-<div id="coP" style="position:relative;"></div>
+<div id="Solidar_P" style="height:50%;position:relative;"></div>
+<div id="Co_P" style="position:relative;"></div>
 </td>
 <td  style="width: 35%;height: 100%; border-left:1px solid black" valign="top">
 <h1>Date despre persoana selectata:</h1>
@@ -100,7 +101,12 @@ $(document).ready(
 </td>
 </tr>
 </table>
-
+<div id="duplicate" style="display:none">
+<h3>Asa persoana exista in Baza de Date:</h3>
+<h4>Selectati persoana corecta din lista pentru a fi updatata</h4>
+<p align="center" style="display:-moz-inline-grid"></p>
+<span style="display:inherit;padding:10px"><button id="duplicateCancel" >Cancel</button></span>
+</div>
 
 
 <script type="text/javascript" src="resources/myJsWidgeds/formSubmitFunctions.js"></script> 

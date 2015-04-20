@@ -1,45 +1,21 @@
 package com.window.globals;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.entities.Persons;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class SolidarDebtorList extends AbstractCDClass{
-	private volatile static SolidarDebtorList uniqueInstance;
-	List<Persons> solDebtor;
-	private SolidarDebtorList(){
-		this.solDebtor=new ArrayList<Persons>();
-	}
-    
-	public static SolidarDebtorList getInstance(){
-		if(uniqueInstance==null){
-			synchronized (SolidarDebtorList.class) {
-				if(uniqueInstance==null){
-					uniqueInstance=new SolidarDebtorList();
-				}
-			}
-		}
-		return uniqueInstance;
-	}
+import com.service.SolidarDebtorService;
 
-	public List<Persons> getTor() {
-		return solDebtor;
-	}
+@Component
+public class SolidarDebtorList {
 
-	public void addTor(Persons list) {
-		this.solDebtor.add(list);
-	}
+	@Autowired
+	private SolidarDebtorService solidarDebtorService;
+
+	 public List<?> getListByIncheiereId(int incId){
+		 return solidarDebtorService.getAllSolidarDebtorsByIncheiere(incId);
+	 }
 	
-	public void editTor(Persons p,int index) {
-		
-		solDebtor.set(index, p);		
 	
-}
-	public void deleteTor(Persons p) {
-		
-		int i=solDebtor.indexOf(p);
-		solDebtor.remove(i);		
-	
-	}
 }

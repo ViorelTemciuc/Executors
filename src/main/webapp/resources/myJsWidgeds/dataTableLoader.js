@@ -6,7 +6,7 @@ function dataTableLoader(source,table){
 function loadTable(source,table){
 	var sourceforPersons=new Array();
 	for (i=0;i<source.length;i++){
-		sourceforPersons[i]=source[i]['person'];
+		sourceforPersons[i]=source[i]['pK']['person'];
 	}
 	var sourceforAdapter =
 	{

@@ -10,11 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 
 
 @Entity
-@Table(name = "CoDebtor")
+@Table(name = "CoDebtor",
+uniqueConstraints=@UniqueConstraint(columnNames={"person_id","incheiere_id"}))
 public class CoDebtor {
 	
 	public CoDebtor(){}

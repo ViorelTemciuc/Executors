@@ -17,7 +17,7 @@ public class AddPersonsFormPublic extends AddPersonsForm {
  
   
  public AddPersonsFormPublic(){
-  this.legend="Adaugare Persona Juridica";
+  this.legend="Adaugare Persoana Juridica";
   this.action="/personsAdd";
   this.id="PPForm";
   widgetList o=widgetList.getInstance();
@@ -48,8 +48,7 @@ public class AddPersonsFormPublic extends AddPersonsForm {
   String form="<form  id='"+this.id+"'>";
   form+="<legend>"+this.legend+"</legend><fieldset>";
   form+=generate_textboxes();
-  form+=generate_checkbox();
-  form+="<div>"+generate_buttons()+"</div></fieldset>";
+  form+="<div id='groupButtons'>"+generate_buttons()+"</div></fieldset>";
   form+="</form>";
   AjaxFormSubmit submit=new AjaxFormSubmit(this.id, this.action);
   submit.setFunction();
