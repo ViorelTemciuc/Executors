@@ -32,12 +32,12 @@ public class PersonsListFactory {
 		Map <String,List<?>> personsMap=new HashMap<String, List<?>>();
 		PersonsListType type=PersonsListType.valueOf(typ);
 		switch(type){
-		case debtors:
+		case Debtor:
 			personsMap.put("solidari", solidarDebtorList.getListByIncheiereId(incheiere_id));
 			personsMap.put("co", coDebtorList.getListByIncheiereId(incheiere_id));
 			break;
 					
-		case creditors:
+		case Creditor:
 			personsMap.put("solidari", solidarCreditorList.getListByIncheiereId(incheiere_id));
 			personsMap.put("co", coCreditorList.getListByIncheiereId(incheiere_id));
 			break;

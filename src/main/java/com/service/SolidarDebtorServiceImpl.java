@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.DAO.SolidarDebtorDAO;
+import com.entities.Incheiere;
 import com.entities.Persons;
 import com.entities.SolidarDebtor;
 
@@ -18,12 +19,12 @@ public class SolidarDebtorServiceImpl implements SolidarDebtorService {
 	private SolidarDebtorDAO solidarDebtorDAO;
 	
 	
-	public void addPerson(SolidarDebtor debtor){
-		solidarDebtorDAO.addPerson(debtor);
+	public void addPerson(Persons person, Incheiere incheiere)throws Exception{
+		solidarDebtorDAO.addPerson(person, incheiere);
 	}
 	
-	public void updatePersons(SolidarDebtor debtor){
-		solidarDebtorDAO.updatePersons(debtor);
+	public void updatePersons(Persons person, Incheiere incheiere){
+		solidarDebtorDAO.updatePersons(person, incheiere);
 	}
 
 	public void deletePersons(SolidarDebtor debtor){
@@ -32,6 +33,11 @@ public class SolidarDebtorServiceImpl implements SolidarDebtorService {
 	
 	public List<SolidarDebtor> getAllSolidarDebtorsByIncheiere(int incheiere_id){
 		return solidarDebtorDAO.getAllSolidarDebtorsByIncheiere(incheiere_id);
+	}
+
+	@Override
+	public SolidarDebtor findSolidarDebtorById(Persons person, Incheiere incheiere) {
+		return	solidarDebtorDAO.findSolidarDebtorById(person, incheiere);
 	}
 
 }

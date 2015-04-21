@@ -41,11 +41,11 @@ public class PersonsAddFactory {
 	private PersonsListFactory personsListFactory;
 	
 	@SuppressWarnings("incomplete-switch")
-	public  Map<String,List<?>> addCorePersons(String typ,int incheiere_id,Persons person){
+	public  Map<String,List<?>> addCorePersons(String typ,int incheiere_id,Persons person)throws Exception{
 		PersonsListType type=PersonsListType.valueOf(typ);
 		switch (type) {
 		case SolidarDebtor:
-			solidarDebtorService.addPerson(new SolidarDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
+			solidarDebtorService.addPerson(person, incheiereService.getIncheiereById(incheiere_id));	
 			break;
 		case CoDebtor: coDebtorService.addPerson(new CoDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
 			break;
@@ -55,7 +55,7 @@ public class PersonsAddFactory {
 			break;
 		}
 		String[] typeArray = typ.split("(?=[A-Z])");
-		typ=typeArray[typeArray.length-1];
+		typ=typeArray[typeArray.length-1];//Debtor
 		return personsListFactory.getCorePersons(typ, incheiere_id);
 				
 	}
@@ -64,7 +64,7 @@ public class PersonsAddFactory {
 		PersonsListType type=PersonsListType.valueOf(typ);
 		switch (type) {
 		case SolidarDebtor:
-			solidarDebtorService.updatePersons(new SolidarDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
+			solidarDebtorService.updatePersons(person, incheiereService.getIncheiereById(incheiere_id));	
 			break;
 		case CoDebtor: coDebtorService.updatePersons(new CoDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
 			break;

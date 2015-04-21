@@ -2,11 +2,14 @@ package com.service;
 
 import java.util.List;
 
+import com.entities.Incheiere;
+import com.entities.Persons;
 import com.entities.SolidarDebtor;
 
 public interface SolidarDebtorService {
-	public void addPerson(SolidarDebtor debtor);
-	public void updatePersons(SolidarDebtor debtor);
+	public SolidarDebtor findSolidarDebtorById(Persons person, Incheiere incheiere);
+	public void addPerson(Persons person, Incheiere incheiere)throws Exception;
+	public void updatePersons(Persons person, Incheiere incheiere);
 	public void deletePersons(SolidarDebtor debtor);
 	public List<SolidarDebtor> getAllSolidarDebtorsByIncheiere(int incheiere_id);
 }

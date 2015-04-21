@@ -5,7 +5,7 @@ var GlobalPersonSubType='';
 var RomanianGlobalPersonSubType='';
 $("#deb").on("click",function(){
 	RomanianGlobalPersonSubType="Debitori";
-	getPersonRequest("/personsGet","debtors",1);
+	getPersonRequest("/personsGet","Debtor",1);
 	GlobalPersonSubType="Debtor"
     
 });
@@ -15,7 +15,7 @@ $("#rdeb").on("click",function(){
 });
 $("#cred").on("click",function(){
 	RomanianGlobalPersonSubType="Creditori";
-	getPersonRequest("/personsGet","creditors",1);
+	getPersonRequest("/personsGet","Creditor",1);
 	GlobalPersonSubType="Creditor"
 	
 });

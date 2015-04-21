@@ -13,8 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "SolidarDebtor",
-uniqueConstraints=@UniqueConstraint(columnNames={"person_id","incheiere_id"}))
+@Table(name = "SolidarDebtor")
 public class SolidarDebtor {
 	
 	public SolidarDebtor(){}

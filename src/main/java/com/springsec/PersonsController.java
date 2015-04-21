@@ -53,11 +53,13 @@ public class PersonsController {
 			persons.add(person);
 			duplicateEntries.put("duplicate",persons);
 			return duplicateEntries;
-			// TODO exception logic here, implement DAO level exceptions
+			// returns source data for duplicate table
 			
 		}
 		
 	}
+	
+	// row double click on duplicate table
 	@RequestMapping(value = { "/personsForceAdd" }, method = { RequestMethod.POST,
 			RequestMethod.GET }, headers = { "Content-type=application/json" })
 	public @ResponseBody Map<String, List<?>> PersonAddForce(@RequestBody Persons person,
