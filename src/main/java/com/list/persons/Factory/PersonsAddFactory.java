@@ -15,6 +15,7 @@ import com.entities.SolidarDebtor;
 import com.service.CoCreditorService;
 import com.service.CoDebtorService;
 import com.service.IncheiereService;
+import com.service.PersonsService;
 import com.service.SolidarCreditorService;
 import com.service.SolidarDebtorService;
 
@@ -23,8 +24,11 @@ import com.service.SolidarDebtorService;
 public class PersonsAddFactory {
 	
 	@Autowired
-	private  SolidarDebtorService solidarDebtorService;
+	private  PersonsService personsService;
 	
+	@Autowired
+	private  SolidarDebtorService solidarDebtorService;
+		
 	@Autowired
 	private  CoDebtorService coDebtorService;
 	
@@ -78,5 +82,28 @@ public class PersonsAddFactory {
 		return personsListFactory.getCorePersons(typ, incheiere_id);
 				
 	}
+	@SuppressWarnings("incomplete-switch")
+	public  Map<String,List<?>> deleteCorePersons(String typ,int incheiere_id,Persons person,boolean deletePersonsTable){
+		PersonsListType type=PersonsListType.valueOf(typ);
+		switch (type) {
+		case SolidarDebtor:
+			solidarDebtorService.deletePersons(person, incheiereService.getIncheiereById(incheiere_id));	
+			break;
+		case CoDebtor: coDebtorService.updatePersons(new CoDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
+			break;
+		case SolidarCreditor: solidarCreditorService.updatePersons(new SolidarCreditor(person, incheiereService.getIncheiereById(incheiere_id)));	
+			break;
+		case CoCreditor: coCreditorService.updatePersons(new CoCreditor(person, incheiereService.getIncheiereById(incheiere_id)));
+			break;
+		}
+		if(deletePersonsTable){
+			personsService.deletePersons(person);
+		}
+		String[] typeArray = typ.split("(?=[A-Z])");
+		typ=typeArray[typeArray.length-1];
+		return personsListFactory.getCorePersons(typ, incheiere_id);
+				
+	}
+	
 
 }

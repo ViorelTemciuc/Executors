@@ -35,7 +35,7 @@ function getPersonRequest(url,type,incheiere_id){
 function constructHtmlList(title,widgetId,present,table,source){
 	if(present){
 		$("<h3>"+title+"</h3>").appendTo($("#"+widgetId));
-		$("<div id='"+table+"'></div>").appendTo($("#"+widgetId));
+		$("<div id='"+table+"' style='margin-bottom:10px'></div>").appendTo($("#"+widgetId));
 		dataTableLoader(source,table);	
 	}
 	else{
@@ -43,16 +43,17 @@ function constructHtmlList(title,widgetId,present,table,source){
 		}
 }
 function constructAddTypesHTML(type,widgetId){
-	$('<div class="personsType">'+
-			'<input id="'+type+'_B" type="button"  value="Adaugare">'+
-			'<select id="'+type+'_BS" name="'+type+'BS">'+
-			'<option value="private">Persoana Fizica</option>'+
-			'<option value="public">Persoana Juridica</option>'+
-			'</select></div></div>').appendTo($("#"+widgetId));
+	$('<div class="personsType" style="display:inline-flex;float:right;margin-right:10px">'+
+			'<button id="'+type+'_B">Adaugare</button>'+
+			'<div id="'+type+'_BS" name="'+type+'BS"></div>').appendTo($("#"+widgetId));
+	 var comboBoxSource = ["Persoana Fizica","Persoana Juridica"];
+	 $("#"+type+"_BS").jqxComboBox({ source: comboBoxSource, selectedIndex: 0, width: '200', height: '25', dropDownHeight:'50px',});
+	 $("#"+type+"_B").jqxButton({ width: '150'});
 	$("#"+type+"_B").on("click",function(){
 		GlobalPersonType=this.id;
 		var formType;
-		if($( "#"+type+"_BS" ).val()=='private')
+		 var item =$("#"+type+"_BS").jqxComboBox('getSelectedItem');
+		if(item.label=='Persoana Fizica')
 			formType="privateForm";
 		else formType="publicForm";
 		$.ajax({
@@ -69,7 +70,7 @@ function constructAddTypesHTML(type,widgetId){
 					                width: '500px' 
 					            } });
 						$("#groupButtons").jqxButtonGroup({ mode: 'default' });
-						   overrideSubmit();
+						   overrideSubmit(false);
 						});
 					 
 					
@@ -81,21 +82,21 @@ function constructAddTypesHTML(type,widgetId){
 	}
 function updateDataTables(map){
 	if(map['solidari'].length>0){
-		$("#solidarP").empty();
-		constructHtmlList("Lista "+RomanianGlobalPersonSubType+"lor solidari","Solidar_P",true,"solidarTable",map['solidari']);
+		$("#Solidar_P").empty();
+		constructHtmlList("Lista "+RomanianGlobalPersonSubType+"lor solidari","Solidar_P",true,"Solidar_Table",map['solidari']);
 		constructAddTypesHTML("Solidar","Solidar_P");}
 	else{
-		$("#solidarP").empty();
+		$("#Solidar_P").empty();
 		constructHtmlList("Nu exista "+RomanianGlobalPersonSubType+"i solidari inserati pentru aceasta procedura","Solidar_P",false,"solidarTable");
 		constructAddTypesHTML("Solidar","Solidar_P");
 	}
 	if(map['co'].length>0){
-		$("#coP").empty();
-		constructHtmlList("Lista co"+RomanianGlobalPersonSubType+"ilor ","Co_P",true,"coTable",map['co']);
+		$("#Co_P").empty();
+		constructHtmlList("Lista co"+RomanianGlobalPersonSubType+"ilor ","Co_P",true,"Co_Table",map['co']);
 		constructAddTypesHTML("Co","Co_P");
 		}
 	else{
-		$("#coP").empty();
+		$("#Co_P").empty();
 		constructHtmlList("Nu exista co "+RomanianGlobalPersonSubType+"i inserati pentru aceasta procedura","Co_P",false,"coTable");
 		constructAddTypesHTML("Co","Co_P");
 	}

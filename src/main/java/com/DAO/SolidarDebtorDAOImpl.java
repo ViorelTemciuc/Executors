@@ -42,16 +42,27 @@ public class SolidarDebtorDAOImpl implements SolidarDebtorDAO {
 
 	@Override
 	public void updatePersons(Persons person, Incheiere incheiere) {
-		SolidarDebtor debtor=findSolidarDebtorById(person, incheiere) ;
-		debtor.setIncheiere(incheiere);
-		debtor.setPerson(person);
+		SolidarDebtor debtor;
+		try{
+			debtor=findSolidarDebtorById(person, incheiere) ;
+			debtor.setIncheiere(incheiere);
+			debtor.setPerson(person);
 			sessionFactory.getCurrentSession().update(debtor);
+		} catch(Exception e) {
+			debtor=new SolidarDebtor(person, incheiere);	
+			sessionFactory.getCurrentSession().save(debtor);
+		}
+		
+		
+			
 	}
 
 	@Override
-	public void deletePersons(SolidarDebtor debtor) {
+	public void deletePersons(Persons person, Incheiere incheiere) {
+		if(findSolidarDebtorById(person, incheiere) == null){
+			  SolidarDebtor debtor = new SolidarDebtor(person, incheiere);
 		sessionFactory.getCurrentSession().delete(debtor);
-
+		}
 	}
 
 	@SuppressWarnings("unchecked")

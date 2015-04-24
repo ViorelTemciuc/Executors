@@ -22,8 +22,13 @@
     <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxpanel.js"></script>
     <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxribbon.js"></script>
     <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxbuttongroup.js"></script>
+    <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="resources/JQWIDGETS/jqwidgets/jqxgrid.selection.js"></script> 
     <script type="text/javascript" src="resources/jsScripts/formModal.js"></script>
-     
+     <script type="text/javascript" src="resources/myJsWidgeds/duplicateHandling.js"></script>
+      <script type="text/javascript" src="resources/myJsWidgeds/initFilledForm.js"></script>
+    
 <!-- JQueryUI dependencies -->
     <link rel="stylesheet" href="resources/JqueryUI/jquery-ui.css">
     <script src="resources/JqueryUI/jquery-ui.js"></script>

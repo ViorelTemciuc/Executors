@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.DAO.AddCorePersonsException;
 import com.DAO.SolidarDebtorDAO;
 import com.entities.Incheiere;
 import com.entities.Persons;
@@ -20,15 +21,17 @@ public class SolidarDebtorServiceImpl implements SolidarDebtorService {
 	
 	
 	public void addPerson(Persons person, Incheiere incheiere)throws Exception{
+		
 		solidarDebtorDAO.addPerson(person, incheiere);
+		
 	}
 	
 	public void updatePersons(Persons person, Incheiere incheiere){
 		solidarDebtorDAO.updatePersons(person, incheiere);
 	}
 
-	public void deletePersons(SolidarDebtor debtor){
-		solidarDebtorDAO.deletePersons(debtor);
+	public void deletePersons(Persons person, Incheiere incheiere){
+		solidarDebtorDAO.deletePersons(person,incheiere);
 	}
 	
 	public List<SolidarDebtor> getAllSolidarDebtorsByIncheiere(int incheiere_id){

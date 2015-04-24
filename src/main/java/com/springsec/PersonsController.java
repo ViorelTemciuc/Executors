@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.DAO.AddCorePersonsException;
 import com.entities.Persons;
 import com.list.persons.Factory.PersonsAddFactory;
 import com.list.persons.Factory.PersonsListFactory;
@@ -40,14 +41,20 @@ public class PersonsController {
 			RequestMethod.GET }, headers = { "Content-type=application/json" })
 	public @ResponseBody Map<String, List<?>> PersonAdd(@RequestBody Persons person,
 			@RequestParam(value = "type") String type,
-			@RequestParam(value = "incheiere_id") int incheiere_id) {
+			@RequestParam(value = "incheiere_id") int incheiere_id,
+			@RequestParam(value = "update") boolean update) {
 		Map <String,List<?>> duplicateEntries=new HashMap<String, List<?>>();
 		try {
-			 personServiceImpl.addPerson(person);
+			 personServiceImpl.addPerson(person,update);
 			return personsAddFactory.addCorePersons(type, incheiere_id, person);
 			
 					    
-		} catch (Exception e) {
+		} 
+		catch(AddCorePersonsException e){
+			 personServiceImpl.updatePersons(person);
+			 return personsAddFactory.updateCorePersons(type, incheiere_id, person);
+		}
+		catch (Exception e) {
 			List<Persons> persons=new ArrayList<Persons>();
 			persons.add(personServiceImpl.getPersonByIdnp(person.getIDNP()));
 			persons.add(person);
@@ -64,7 +71,8 @@ public class PersonsController {
 			RequestMethod.GET }, headers = { "Content-type=application/json" })
 	public @ResponseBody Map<String, List<?>> PersonAddForce(@RequestBody Persons person,
 			@RequestParam(value = "type") String type,
-			@RequestParam(value = "incheiere_id") int incheiere_id) {
+			@RequestParam(value = "incheiere_id") int incheiere_id,
+			@RequestParam(value = "update") boolean update) {
 			 personServiceImpl.updatePersons(person);
 			 try{
 			 return personsAddFactory.addCorePersons(type, incheiere_id, person);
@@ -73,6 +81,16 @@ public class PersonsController {
 		 catch (Exception e) {
 			 return personsAddFactory.updateCorePersons(type, incheiere_id, person);
 		}
+		
+	}
+	@RequestMapping(value = { "/personsDelete" }, method = { RequestMethod.POST,
+			RequestMethod.GET }, headers = { "Content-type=application/json" })
+	public @ResponseBody Map<String, List<?>> personsDelete(@RequestBody Persons person,
+			@RequestParam(value = "type") String type,
+			@RequestParam(value = "incheiere_id") int incheiere_id,
+			@RequestParam(value = "personsTable") boolean update) {
+		 	 
+			 return personsAddFactory.deleteCorePersons(type, incheiere_id, person,update);
 		
 	}
 	@RequestMapping(value = { "/personsGet" }, method = RequestMethod.GET)

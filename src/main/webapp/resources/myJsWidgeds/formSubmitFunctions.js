@@ -1,9 +1,12 @@
-function overrideSubmit(){
+function overrideSubmit(update){
+	$('#idnp').bind('input', function() {
+	   update=false;
+	} );
 $("#"+id+" input[type='submit']").click(function(e){
 		e.preventDefault();
 		var serializedData =$("#"+id).serializeObject();
 		if(serializedData['sname'] !== undefined) {
-		serializedData['name']=serializedData['name']+" "+serializedData['sname'];
+		serializedData['name']=serializedData['name']+"|"+serializedData['sname'];
 		delete serializedData['sname'];
 		}
 		serializedData['idnp']=parseInt(serializedData['idnp']);
@@ -13,15 +16,18 @@ $("#"+id+" input[type='submit']").click(function(e){
 		$.ajax({
 			contentType: 'application/json',
 			type:"POST",
-			url:urlPersons+url+"?type="+subType+"&incheiere_id=1",
+			url:urlPersons+url+"?type="+subType+"&incheiere_id=1&update="+update,
 			data:JSON.stringify(serializedData),
 			success:function(map){
-				if(map['duplicate']===null)
+				if(map['duplicate']===undefined){
 				updateDataTables(map);
+				$.unblockUI();
+				$("#PPForm").remove();
+				}
 				else{
-					$.getScript('resources/myJsWidgeds/duplicateHandling.js').done(function() {
+					
 						construcDuplicateWindow(map['duplicate']);
-					});
+											
 				}
 					
 			}
