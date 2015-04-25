@@ -28,10 +28,11 @@
     <script type="text/javascript" src="resources/jsScripts/formModal.js"></script>
      <script type="text/javascript" src="resources/myJsWidgeds/duplicateHandling.js"></script>
       <script type="text/javascript" src="resources/myJsWidgeds/initFilledForm.js"></script>
+      <script type="text/javascript" src="resources/myJsWidgeds/searchButtonSourceHandling.js"></script>
     
 <!-- JQueryUI dependencies -->
-    <link rel="stylesheet" href="resources/JqueryUI/jquery-ui.css">
-    <script src="resources/JqueryUI/jquery-ui.js"></script>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <!-- jsStaticSources -->
     
 
@@ -74,7 +75,7 @@ $(document).ready(
 <table  style="width: 100%;height: 100%">
 <tr>
 <td  style="width: 65%;height: 100%" valign="top">
-<div id="Solidar_P" style="height:50%;position:relative;"></div>
+<div id="Solidar_P" style="height:50%;position:relative;z-index:1;margin-left:2%"></div>
 <div id="Co_P" style="position:relative;"></div>
 </td>
 <td  style="width: 35%;height: 100%; border-left:1px solid black" valign="top">
@@ -112,7 +113,10 @@ $(document).ready(
 <p align="center" style="display:-moz-inline-grid"></p>
 <span style="display:inherit;padding:10px"><button id="duplicateCancel" >Cancel</button></span>
 </div>
-
+<div id="dialog-confirm" title="Stergerea persoanei ?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+  Doriti eliminarea acestei persoane din Inchere si/sau din DB?</p>
+</div>
 
 <script type="text/javascript" src="resources/myJsWidgeds/formSubmitFunctions.js"></script> 
 <script type="text/javascript" src="resources/myJsWidgeds/dataTableLoader.js"></script>

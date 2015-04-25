@@ -83,11 +83,11 @@ public class PersonsAddFactory {
 				
 	}
 	@SuppressWarnings("incomplete-switch")
-	public  Map<String,List<?>> deleteCorePersons(String typ,int incheiere_id,Persons person,boolean deletePersonsTable){
+	public  Map<String,List<?>> deleteCorePersons(String typ,int incheiere_id,Persons person,boolean all){
 		PersonsListType type=PersonsListType.valueOf(typ);
 		switch (type) {
 		case SolidarDebtor:
-			solidarDebtorService.deletePersons(person, incheiereService.getIncheiereById(incheiere_id));	
+			 solidarDebtorService.deletePersons(person, incheiereService.getIncheiereById(incheiere_id));	
 			break;
 		case CoDebtor: coDebtorService.updatePersons(new CoDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
 			break;
@@ -96,7 +96,7 @@ public class PersonsAddFactory {
 		case CoCreditor: coCreditorService.updatePersons(new CoCreditor(person, incheiereService.getIncheiereById(incheiere_id)));
 			break;
 		}
-		if(deletePersonsTable){
+		if(all){
 			personsService.deletePersons(person);
 		}
 		String[] typeArray = typ.split("(?=[A-Z])");

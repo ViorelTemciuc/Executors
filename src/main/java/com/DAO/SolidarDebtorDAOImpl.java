@@ -59,8 +59,8 @@ public class SolidarDebtorDAOImpl implements SolidarDebtorDAO {
 
 	@Override
 	public void deletePersons(Persons person, Incheiere incheiere) {
-		if(findSolidarDebtorById(person, incheiere) == null){
-			  SolidarDebtor debtor = new SolidarDebtor(person, incheiere);
+		if(findSolidarDebtorById(person, incheiere) != null){
+			  SolidarDebtor debtor = findSolidarDebtorById(person, incheiere);
 		sessionFactory.getCurrentSession().delete(debtor);
 		}
 	}

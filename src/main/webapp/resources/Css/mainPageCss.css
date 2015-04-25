@@ -37,4 +37,45 @@ textarea:focus, input:not([button]):focus {
 	height:20px;
 	margin-bottom:10px;
 }
+.search-widget{
+	position:absolute;
+	top:0px;
+	right:10px
+}
+#Solidar_B{
+	border-top:none;
+	border-left:none;
+	border-bottom:none;
+	border-radius:0px;
+}
+#Solidar_BS{
+	border:none;
+	
+}
+#Co_B{
+	border-top:none;
+	border-left:none;
+	border-bottom:none;
+	border-radius:0px;
+}
+#Co_BS{
+	border:none;
+	
+}
+#searchIcon{
+	text-indent: -1000em;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url(http://p.yusukekamiyamane.com/icons/search/fugue/icons/magnifier.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 3px;
+    top: -12px;
+    border-left:1px solid #AAA;
 
+}
+.personsType{
+	border:1px solid #AAA;
+	border-radius:3px;
+}

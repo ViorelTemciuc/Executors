@@ -1,6 +1,8 @@
 package com.DAO;
 
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,21 +15,23 @@ public class PersonsDAOImpl implements PersonsDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-//	@Override
-//	public List<PersoanaFizica> getPersoaneFiziceByLastName(String lastname) {
-//		return sessionFactory.getCurrentSession()
-//				.createQuery("from PersoanaFizica where nume like CONCAT(:pattern,'%')")
-//				.setParameter("pattern", lastname).list();
-//	}
-//
-//	@Override
-//	public List<PersoanaFizica> getPersoaneFiziceByIDNP(Long idnp) {
-//		
-//		
-//		return sessionFactory.getCurrentSession()
-//				.createQuery("from PersoanaFizica where idnp like CONCAT(:pattern,'%')")
-//				.setParameter("pattern", idnp).list();
-//	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Persons> searchPersonsListByDynamicName(String name) {
+		return sessionFactory.getCurrentSession()
+				.createQuery("from Persons where name like CONCAT(:pattern,'%')")
+				.setParameter("pattern", name).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Persons> searchPersonListByDynamicIdnp(Long idnp) {
+		
+		
+		return sessionFactory.getCurrentSession()
+				.createQuery("from Persons where idnp like CONCAT(:pattern,'%')")
+				.setParameter("pattern", idnp).list();
+	}
 	@Override
 	public Persons getPersonByIdnp(Long idnp) {
 		 return (Persons) sessionFactory.getCurrentSession().get(

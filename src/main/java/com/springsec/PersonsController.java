@@ -88,9 +88,9 @@ public class PersonsController {
 	public @ResponseBody Map<String, List<?>> personsDelete(@RequestBody Persons person,
 			@RequestParam(value = "type") String type,
 			@RequestParam(value = "incheiere_id") int incheiere_id,
-			@RequestParam(value = "personsTable") boolean update) {
-		 	 
-			 return personsAddFactory.deleteCorePersons(type, incheiere_id, person,update);
+			@RequestParam(value = "all") boolean all) {
+		 	 		
+			 return personsAddFactory.deleteCorePersons(type, incheiere_id, person,all);
 		
 	}
 	@RequestMapping(value = { "/personsGet" }, method = RequestMethod.GET)
@@ -100,6 +100,19 @@ public class PersonsController {
 		
 		
 		return personsListFactory.getCorePersons(type, incheiere_id);
+	}
+	
+	@RequestMapping(value = { "/getSearchedPersons" }, method = RequestMethod.GET)
+	public @ResponseBody  List<Persons> getSearchedPersons(
+			@RequestParam(value = "term") String by)
+			 {
+		try {
+			return personServiceImpl.searchPersonListByDynamicIdnp(Long.parseLong(by));
+		}
+		catch(Exception e) {
+			return personServiceImpl.searchPersonsListByDynamicName(by);
+		}
+		
 	}
 //	 @RequestMapping(value = { "/personsEdit/{personId}" }, method =
 //	 {RequestMethod.POST,RequestMethod.GET}, headers =

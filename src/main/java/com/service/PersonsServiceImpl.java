@@ -2,6 +2,8 @@ package com.service;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,18 +20,18 @@ public class PersonsServiceImpl implements PersonsService {
 
 	@Autowired
 	private PersonsDAO personDAO;
-//	@Override
-//	 @Transactional
-//	 public List<PrivatePerson> getPersoaneFiziceByLastName(String lastname) {
-//		// TODO Auto-generated method stub
-//		return pfDAO.getPersoaneFiziceByLastName(lastname);
-//	}
-//	@Override
-//	 @Transactional
-//	 public List<PersoanaFizica> getPersoaneFiziceByIDNP(Long idnp) {
-//		// TODO Auto-generated method stub
-//		return pfDAO.getPersoaneFiziceByIDNP(idnp);
-//	}
+	@Override
+	 @Transactional
+	 public List<Persons> searchPersonsListByDynamicName(String name) {
+		// TODO Auto-generated method stub
+		return personDAO.searchPersonsListByDynamicName(name);
+	}
+	@Override
+	 @Transactional
+	 public List<Persons> searchPersonListByDynamicIdnp(Long idnp) {
+		// TODO Auto-generated method stub
+		return personDAO.searchPersonListByDynamicIdnp(idnp);
+	}
 	@Override
 	 @Transactional
 	public void addPerson(Persons person,boolean update) throws AddCorePersonsException{

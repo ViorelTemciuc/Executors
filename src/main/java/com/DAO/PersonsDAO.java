@@ -1,15 +1,14 @@
 package com.DAO;
 
+import java.util.List;
+
 import com.entities.Persons;
 
-
-
-//import com.entities.PersoanaFizica;
-
 public interface PersonsDAO {
-//	public List<PersoanaFizica> getPersoaneFiziceByLastName(String lastname);
-//	public List<PersoanaFizica> getPersoaneFiziceByIDNP(Long idnp);
+
 	public Persons getPersonByIdnp(Long idnp);
+	public List<Persons> searchPersonListByDynamicIdnp(Long idnp);
+	public List<Persons> searchPersonsListByDynamicName(String name);
 	public void addPrivatePerson(Persons person);
 	public void updatePersons(Persons p);
 	public void deletePersons(Persons p);

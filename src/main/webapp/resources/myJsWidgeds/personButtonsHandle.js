@@ -35,11 +35,13 @@ function getPersonRequest(url,type,incheiere_id){
 function constructHtmlList(title,widgetId,present,table,source){
 	if(present){
 		$("<h3>"+title+"</h3>").appendTo($("#"+widgetId));
+		searchWidget(widgetId,widgetId+"search");
 		$("<div id='"+table+"' style='margin-bottom:10px'></div>").appendTo($("#"+widgetId));
 		dataTableLoader(source,table);	
 	}
 	else{
 		$title=$("<h3>"+title+"</h3>").appendTo($("#"+widgetId));
+		searchWidget(widgetId,widgetId+"search");
 		}
 }
 function constructAddTypesHTML(type,widgetId){
@@ -101,3 +103,10 @@ function updateDataTables(map){
 		constructAddTypesHTML("Co","Co_P");
 	}
 }
+function searchWidget(widgetId,inputId){
+	$('<div class="search-widget">' +
+	  '<label for="'+inputId+'" style="line-height:2" >Cautare: </label>' +
+	  '<input id="'+inputId+'" style="padding:0px"/><p id="searchIcon"></p>' +
+	  '</div>').appendTo($("#"+widgetId));
+	   constructSearchButtonWidget(inputId);
+	 }
