@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.DAO.SolidarCreditorDAO;
-import com.DAO.SolidarDebtorDAO;
+import com.entities.Incheiere;
 import com.entities.Persons;
 import com.entities.SolidarCreditor;
-import com.entities.SolidarDebtor;
 
 @Service
 @Transactional
@@ -20,20 +19,28 @@ public class SolidarCreditorServiceImpl implements SolidarCreditorService {
 	private SolidarCreditorDAO solidarCreditorDAO;
 	
 	
-	public void addPerson(SolidarCreditor creditor){
-		solidarCreditorDAO.addPerson(creditor);
+	public void addPerson(Persons person, Incheiere incheiere)throws Exception{
+		
+		solidarCreditorDAO.addPerson(person, incheiere);
+		
 	}
 	
-	public void updatePersons(SolidarCreditor creditor){
-		solidarCreditorDAO.updatePersons(creditor);
+	public void updatePersons(Persons person, Incheiere incheiere){
+		solidarCreditorDAO.updatePersons(person, incheiere);
 	}
 
-	public void deletePersons(SolidarCreditor creditor){
-		solidarCreditorDAO.deletePersons(creditor);
+	public boolean deletePersons(Persons person, Incheiere incheiere){
+		return solidarCreditorDAO.deletePersons(person,incheiere);
 	}
 	
 	public List<SolidarCreditor> getAllSolidarCreditorsByIncheiere(int incheiere_id){
 		return solidarCreditorDAO.getAllSolidarCreditorsByIncheiere(incheiere_id);
 	}
+
+	public SolidarCreditor findSolidarCreditorById(Persons person, Incheiere incheiere) {
+		return	solidarCreditorDAO.findSolidarCreditorById(person, incheiere);
+	}
+
+	
 
 }

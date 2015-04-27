@@ -6,11 +6,13 @@ var RomanianGlobalPersonSubType='';
 $("#deb").on("click",function(){
 	RomanianGlobalPersonSubType="Debitori";
 	getPersonRequest("/personsGet","Debtor",1);
-	GlobalPersonSubType="Debtor"
+	GlobalPersonSubType="Debtor";
     
 });
 $("#rdeb").on("click",function(){
-	getPersonRequest("/personsGet","CoDebtors",1);
+	RomanianGlobalPersonSubType="Reprezentanti debitor";
+	getPersonRequest("/personsGet","Debtorr",1);
+	GlobalPersonSubType="Debtorr";
 	
 });
 $("#cred").on("click",function(){
@@ -20,8 +22,9 @@ $("#cred").on("click",function(){
 	
 });
 $("#rcred").on("click",function(){
-	getPersonRequest("/personsGet","CoCreditors",1);
-	RomanianGlobalPersonSubType="Creditori";
+	getPersonRequest("/personsGet","Creditorr",1);
+	RomanianGlobalPersonSubType="Reprezentanti creditor";
+	GlobalPersonSubType="Creditorr";
 	
 });
 function getPersonRequest(url,type,incheiere_id){
@@ -36,11 +39,11 @@ function constructHtmlList(title,widgetId,present,table,source){
 	if(present){
 		$("<h3>"+title+"</h3>").appendTo($("#"+widgetId));
 		searchWidget(widgetId,widgetId+"search");
-		$("<div id='"+table+"' style='margin-bottom:10px'></div>").appendTo($("#"+widgetId));
+		$("<div id='"+table+"' style='margin-bottom:10px;margin-right:20px;'></div>").appendTo($("#"+widgetId));
 		dataTableLoader(source,table);	
 	}
 	else{
-		$title=$("<h3>"+title+"</h3>").appendTo($("#"+widgetId));
+		$title=$("<h5><p style='margin-left:10px;width:50%'>"+title+"</p></h5>").appendTo($("#"+widgetId));
 		searchWidget(widgetId,widgetId+"search");
 		}
 }
@@ -61,16 +64,17 @@ function constructAddTypesHTML(type,widgetId){
 		$.ajax({
 				url:urlMain+"/initPersonsAddForm?formType="+formType,
 				success:function(form){
-					$( "body" ).append(form);
+					
 					
 					$.getScript('resources/myJsWidgeds/formAddWidget.js').done(function() {
-						generateForm();
-						$.blockUI({ message: $('#PPForm'),
+						
+						$.blockUI({ message: form,
 							 css: { 
 					                top:  ($(window).height() - 400) /2 + 'px', 
 					                left: ($(window).width() - 400) /2 + 'px', 
 					                width: '500px' 
 					            } });
+						generateForm();
 						$("#groupButtons").jqxButtonGroup({ mode: 'default' });
 						   overrideSubmit(false);
 						});
@@ -83,24 +87,52 @@ function constructAddTypesHTML(type,widgetId){
 		});
 	}
 function updateDataTables(map){
+	if(map['solidari']!==undefined){
 	if(map['solidari'].length>0){
 		$("#Solidar_P").empty();
+		$("#Representy_P").empty();
+		$("#Representy_P").css("display","none");
 		constructHtmlList("Lista "+RomanianGlobalPersonSubType+"lor solidari","Solidar_P",true,"Solidar_Table",map['solidari']);
 		constructAddTypesHTML("Solidar","Solidar_P");}
 	else{
 		$("#Solidar_P").empty();
+		$("#Representy_P").empty();
+		$("#Representy_P").css("display","none");
 		constructHtmlList("Nu exista "+RomanianGlobalPersonSubType+"i solidari inserati pentru aceasta procedura","Solidar_P",false,"solidarTable");
 		constructAddTypesHTML("Solidar","Solidar_P");
 	}
 	if(map['co'].length>0){
 		$("#Co_P").empty();
+		$("#Representy_P").empty();
+		$("#Representy_P").css("display","none");
 		constructHtmlList("Lista co"+RomanianGlobalPersonSubType+"ilor ","Co_P",true,"Co_Table",map['co']);
 		constructAddTypesHTML("Co","Co_P");
 		}
 	else{
 		$("#Co_P").empty();
+		$("#Representy_P").empty();
+		$("#Representy_P").css("display","none");
 		constructHtmlList("Nu exista co "+RomanianGlobalPersonSubType+"i inserati pentru aceasta procedura","Co_P",false,"coTable");
 		constructAddTypesHTML("Co","Co_P");
+	}
+	}
+	else{
+	if(map['reprezentantCreditor']){
+		$("#Representy_P").empty();
+		$("#Solidar_P").empty();
+		$("#Co_P").empty();
+		constructHtmlList("Lista "+RomanianGlobalPersonSubType,"Representy_P",true,"Representy_Table",map['reprezentantCreditor']);
+		constructAddTypesHTML("Representy","Representy_P");
+		$("#Representy_P").css("display","block");
+	}
+	if(map['reprezentantDebitor']){
+		$("#Representy_P").empty();
+		$("#Solidar_P").empty();
+		$("#Co_P").empty();
+		constructHtmlList("Lista "+RomanianGlobalPersonSubType,"Representy_P",true,"Representy_Table",map['reprezentantDebitor']);
+		constructAddTypesHTML("Representy","Representy_P");
+		$("#Representy_P").css("display","block");
+	}
 	}
 }
 function searchWidget(widgetId,inputId){

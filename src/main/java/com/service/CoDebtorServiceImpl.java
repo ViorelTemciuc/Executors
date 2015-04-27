@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.DAO.CoDebtorDAO;
 import com.entities.CoDebtor;
+import com.entities.Incheiere;
+import com.entities.Persons;
+
 
 @Service
 @Transactional
@@ -17,20 +20,28 @@ public class CoDebtorServiceImpl implements CoDebtorService {
 	private CoDebtorDAO CoDebtorDAO;
 	
 	
-	public void addPerson(CoDebtor debtor){
-		CoDebtorDAO.addPerson(debtor);
+	public void addPerson(Persons person, Incheiere incheiere)throws Exception{
+		
+		CoDebtorDAO.addPerson(person, incheiere);
+		
 	}
 	
-	public void updatePersons(CoDebtor debtor){
-		CoDebtorDAO.updatePersons(debtor);
+	public void updatePersons(Persons person, Incheiere incheiere){
+		CoDebtorDAO.updatePersons(person, incheiere);
 	}
 
-	public void deletePersons(CoDebtor debtor){
-		CoDebtorDAO.deletePersons(debtor);
+	public boolean deletePersons(Persons person, Incheiere incheiere){
+		return CoDebtorDAO.deletePersons(person,incheiere);
 	}
 	
 	public List<CoDebtor> getAllCoDebtorsByIncheiere(int incheiere_id){
 		return CoDebtorDAO.getAllCoDebtorsByIncheiere(incheiere_id);
+	}
+
+	
+	@Override
+	public CoDebtor findCoDebtorById(Persons person, Incheiere incheiere) {
+		return CoDebtorDAO.findCoDebtorById(person, incheiere);
 	}
 
 }

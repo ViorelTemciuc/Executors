@@ -1,9 +1,7 @@
 package com.entities;
-import java.io.Serializable;
+
 import java.sql.Date;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,22 +9,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.GenericGenerator;
+
+
 
 @Entity
 @Table(name="Incheieri")
@@ -38,6 +32,14 @@ public class Incheiere {
 	private int nr_hotarire_executare;
 	private int nr_procedura_executare;
 	private String descriere_incheiere;
+	private Set<Category> categories = new HashSet<Category>(0);
+	
+	public Incheiere() {
+		// TODO Auto-generated constructor stub
+	}
+	public Incheiere(Set<Category> categories) {
+		this.categories = categories;
+	}
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -91,5 +93,17 @@ public class Incheiere {
 	}
 	public void setDescriere_incheiere(String descriere_incheiere) {
 		this.descriere_incheiere = descriere_incheiere;
+	}
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "incheieri_category", joinColumns = { 
+			@JoinColumn(name = "id", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "CATEGORY_ID", 
+					nullable = false, updatable = false) })
+	public Set<Category> getCategories() {
+		return this.categories;
+	}
+ 
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
 	}
 }

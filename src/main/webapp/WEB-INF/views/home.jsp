@@ -75,8 +75,9 @@ $(document).ready(
 <table  style="width: 100%;height: 100%">
 <tr>
 <td  style="width: 65%;height: 100%" valign="top">
+<div id="Representy_P" style="height:50%;position:relative;z-index:1;margin-left:2%;display:none"></div>
 <div id="Solidar_P" style="height:50%;position:relative;z-index:1;margin-left:2%"></div>
-<div id="Co_P" style="position:relative;"></div>
+<div id="Co_P" style="position:relative;z-index:1;margin-left:2%"></div>
 </td>
 <td  style="width: 35%;height: 100%; border-left:1px solid black" valign="top">
 <h1>Date despre persoana selectata:</h1>

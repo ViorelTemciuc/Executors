@@ -20,13 +20,14 @@ $("#"+id+" input[type='submit']").click(function(e){
 			data:JSON.stringify(serializedData),
 			success:function(map){
 				if(map['duplicate']===undefined){
-				updateDataTables(map);
-				$.unblockUI();
-				$("#PPForm").remove();
+					$.unblockUI();
+					updateDataTables(map);
+			
+				
 				}
 				else{
-					
-						construcDuplicateWindow(map['duplicate']);
+					$.unblockUI();
+					construcDuplicateWindow(map['duplicate']);
 											
 				}
 					

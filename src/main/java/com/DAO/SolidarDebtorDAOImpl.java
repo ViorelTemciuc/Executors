@@ -58,13 +58,32 @@ public class SolidarDebtorDAOImpl implements SolidarDebtorDAO {
 	}
 
 	@Override
-	public void deletePersons(Persons person, Incheiere incheiere) {
+	public boolean deletePersons(Persons person, Incheiere incheiere) {
+		
 		if(findSolidarDebtorById(person, incheiere) != null){
 			  SolidarDebtor debtor = findSolidarDebtorById(person, incheiere);
-		sessionFactory.getCurrentSession().delete(debtor);
+			  sessionFactory.getCurrentSession().delete(debtor);
+			  if(!checkIfPersonExistInOtherIncheieriOnDelete(person)){				  
+				  return true;
+			  }
+			  else {
+				  return false;
+			  }
+				  
+		}
+		else{
+			return false;
 		}
 	}
-
+    private boolean checkIfPersonExistInOtherIncheieriOnDelete(Persons person){
+    	Query query = sessionFactory.getCurrentSession().createQuery(
+				"from SolidarDebtor where person_id=:id_person");
+		query.setParameter("id_person", person.getIDNP());
+		if(query.list().size()>0)
+			return true;
+		else return false;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SolidarDebtor> getAllSolidarDebtorsByIncheiere(int incheiere_id) {

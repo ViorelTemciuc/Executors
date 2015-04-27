@@ -10,6 +10,7 @@ public class TextBox {
 	private final String id;
 	private final int height;
 	private final int width;
+	@SuppressWarnings({ "unused", "rawtypes" })
 	private final List source;
 	private final int minLength;
 	
@@ -21,6 +22,7 @@ public class TextBox {
 		//optional parameters
 		private int height;
 		private int width;
+		@SuppressWarnings("rawtypes")
 		private List source;
 		private int minLength;
 		
@@ -35,6 +37,7 @@ public class TextBox {
 	public Builder width(int val){
 		width=val;return this;
 	}
+	@SuppressWarnings("rawtypes")
 	public Builder source(List val){
 		source=val;return this;
 	}

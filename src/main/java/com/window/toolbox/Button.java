@@ -5,6 +5,7 @@ public class Button {
 	private final String id;
 	private final String value;
 	private final String type;
+	@SuppressWarnings("unused")
 	private final String actionURL;
 	private final int width;
 	private final boolean disabled;

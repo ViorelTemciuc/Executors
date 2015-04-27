@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.window.globals.CoCreditorList;
 import com.window.globals.CoDebtorList;
+import com.window.globals.CreditorRepresentyList;
+import com.window.globals.DebtorRepresentyList;
 import com.window.globals.SolidarCreditorList;
 import com.window.globals.SolidarDebtorList;
 
@@ -27,6 +29,12 @@ public class PersonsListFactory {
 	@Autowired
 	private  CoCreditorList coCreditorList;
 	
+	@Autowired
+	private DebtorRepresentyList debtorRepresentyList;
+	
+	@Autowired
+	private CreditorRepresentyList creditorRepresentyList;
+	
 	@SuppressWarnings("incomplete-switch")
 	public  Map<String,List<?>> getCorePersons(String typ,int incheiere_id){
 		Map <String,List<?>> personsMap=new HashMap<String, List<?>>();
@@ -41,8 +49,14 @@ public class PersonsListFactory {
 			personsMap.put("solidari", solidarCreditorList.getListByIncheiereId(incheiere_id));
 			personsMap.put("co", coCreditorList.getListByIncheiereId(incheiere_id));
 			break;
-			
+		case Creditorr:
+			personsMap.put("reprezentantCreditor", creditorRepresentyList.getListByIncheiereId(incheiere_id));
+			break;
+		case Debtorr:
+			personsMap.put("reprezentantDebitor", debtorRepresentyList.getListByIncheiereId(incheiere_id));
+			break;
 		}
+		
 		return personsMap;
 				
 	}

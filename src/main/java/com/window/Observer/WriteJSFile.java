@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 public class WriteJSFile implements WriteFileSubject{
 	
+	@SuppressWarnings("rawtypes")
 	private ArrayList observers;
 	private String filePath;
 
+	@SuppressWarnings("rawtypes")
 	public WriteJSFile(){
 		observers=new ArrayList();
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public void registerObserver(Observer o) {
 		

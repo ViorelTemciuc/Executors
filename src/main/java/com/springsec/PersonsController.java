@@ -83,6 +83,24 @@ public class PersonsController {
 		}
 		
 	}
+	
+	@RequestMapping(value = { "/personsFromSearchAdd" }, method = RequestMethod.GET )
+	public @ResponseBody Map<String, List<?>> personsFromSearchAdd(
+			@RequestParam(value = "idnp") Long idnp,
+			@RequestParam(value = "type") String type,
+			@RequestParam(value = "incheiere_id") int incheiere_id) {
+		Persons person = personServiceImpl.getPersonByIdnp(idnp);
+			 personServiceImpl.updatePersons(person);
+			 try{
+			 return personsAddFactory.addCorePersons(type, incheiere_id, person);
+			 }
+					    
+		 catch (Exception e) {
+			 return personsAddFactory.updateCorePersons(type, incheiere_id, person);
+		}
+		
+	}
+	
 	@RequestMapping(value = { "/personsDelete" }, method = { RequestMethod.POST,
 			RequestMethod.GET }, headers = { "Content-type=application/json" })
 	public @ResponseBody Map<String, List<?>> personsDelete(@RequestBody Persons person,
@@ -103,16 +121,24 @@ public class PersonsController {
 	}
 	
 	@RequestMapping(value = { "/getSearchedPersons" }, method = RequestMethod.GET)
-	public @ResponseBody  List<Persons> getSearchedPersons(
-			@RequestParam(value = "term") String by)
-			 {
+	public @ResponseBody  List<String> getSearchedPersons(
+			@RequestParam(value = "term") String by) {
+		
 		try {
-			return personServiceImpl.searchPersonListByDynamicIdnp(Long.parseLong(by));
+			return assArrayList(personServiceImpl.searchPersonListByDynamicIdnp(Long.parseLong(by)));
 		}
 		catch(Exception e) {
-			return personServiceImpl.searchPersonsListByDynamicName(by);
+			return assArrayList(personServiceImpl.searchPersonsListByDynamicName(by));
 		}
 		
+	}
+	private List<String> assArrayList(List<Persons> persons) {
+		List<String> returnedList=new ArrayList<String>();
+		for(Persons p : persons){
+			String toAdd=p.getIDNP() + " , " + p.getName();
+			returnedList.add(toAdd);
+		}
+		return returnedList;
 	}
 //	 @RequestMapping(value = { "/personsEdit/{personId}" }, method =
 //	 {RequestMethod.POST,RequestMethod.GET}, headers =

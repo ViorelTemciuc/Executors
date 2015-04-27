@@ -1,19 +1,17 @@
 package com.list.persons.Factory;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.entities.CoCreditor;
-import com.entities.CoDebtor;
 import com.entities.Persons;
-import com.entities.SolidarCreditor;
-import com.entities.SolidarDebtor;
 import com.service.CoCreditorService;
 import com.service.CoDebtorService;
+import com.service.CreditorRepresentyService;
+import com.service.DebtorRepresentyService;
 import com.service.IncheiereService;
 import com.service.PersonsService;
 import com.service.SolidarCreditorService;
@@ -39,6 +37,12 @@ public class PersonsAddFactory {
 	private  CoCreditorService coCreditorService;
 	
 	@Autowired
+	private  DebtorRepresentyService debtorRepresentyService;
+	
+	@Autowired
+	private  CreditorRepresentyService creditorRepresentyService;
+	
+	@Autowired
 	private IncheiereService incheiereService;
 	
 	@Autowired
@@ -51,11 +55,15 @@ public class PersonsAddFactory {
 		case SolidarDebtor:
 			solidarDebtorService.addPerson(person, incheiereService.getIncheiereById(incheiere_id));	
 			break;
-		case CoDebtor: coDebtorService.addPerson(new CoDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
+		case CoDebtor: coDebtorService.addPerson(person,incheiereService.getIncheiereById(incheiere_id));	
 			break;
-		case SolidarCreditor: solidarCreditorService.addPerson(new SolidarCreditor(person, incheiereService.getIncheiereById(incheiere_id)));	
+		case SolidarCreditor: solidarCreditorService.addPerson(person,incheiereService.getIncheiereById(incheiere_id));	
 			break;
-		case CoCreditor: coCreditorService.addPerson(new CoCreditor(person, incheiereService.getIncheiereById(incheiere_id)));
+		case CoCreditor: coCreditorService.addPerson(person,incheiereService.getIncheiereById(incheiere_id));
+			break;
+		case RepresentyCreditorr: creditorRepresentyService.addPerson(person, incheiereService.getIncheiereById(incheiere_id));
+			break;
+		case RepresentyDebtorr: debtorRepresentyService.addPerson(person, incheiereService.getIncheiereById(incheiere_id));
 			break;
 		}
 		String[] typeArray = typ.split("(?=[A-Z])");
@@ -70,11 +78,11 @@ public class PersonsAddFactory {
 		case SolidarDebtor:
 			solidarDebtorService.updatePersons(person, incheiereService.getIncheiereById(incheiere_id));	
 			break;
-		case CoDebtor: coDebtorService.updatePersons(new CoDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
+		case CoDebtor: coDebtorService.updatePersons(person, incheiereService.getIncheiereById(incheiere_id));	
 			break;
-		case SolidarCreditor: solidarCreditorService.updatePersons(new SolidarCreditor(person, incheiereService.getIncheiereById(incheiere_id)));	
+		case SolidarCreditor: solidarCreditorService.updatePersons(person, incheiereService.getIncheiereById(incheiere_id));
 			break;
-		case CoCreditor: coCreditorService.updatePersons(new CoCreditor(person, incheiereService.getIncheiereById(incheiere_id)));
+		case CoCreditor: coCreditorService.updatePersons(person, incheiereService.getIncheiereById(incheiere_id));
 			break;
 		}
 		String[] typeArray = typ.split("(?=[A-Z])");
@@ -82,20 +90,15 @@ public class PersonsAddFactory {
 		return personsListFactory.getCorePersons(typ, incheiere_id);
 				
 	}
-	@SuppressWarnings("incomplete-switch")
+	
 	public  Map<String,List<?>> deleteCorePersons(String typ,int incheiere_id,Persons person,boolean all){
-		PersonsListType type=PersonsListType.valueOf(typ);
-		switch (type) {
-		case SolidarDebtor:
-			 solidarDebtorService.deletePersons(person, incheiereService.getIncheiereById(incheiere_id));	
-			break;
-		case CoDebtor: coDebtorService.updatePersons(new CoDebtor(person, incheiereService.getIncheiereById(incheiere_id)));	
-			break;
-		case SolidarCreditor: solidarCreditorService.updatePersons(new SolidarCreditor(person, incheiereService.getIncheiereById(incheiere_id)));	
-			break;
-		case CoCreditor: coCreditorService.updatePersons(new CoCreditor(person, incheiereService.getIncheiereById(incheiere_id)));
-			break;
-		}
+		
+		
+			 all = solidarDebtorService.deletePersons(person, incheiereService.getIncheiereById(incheiere_id));	
+		     all = coDebtorService.deletePersons(person, incheiereService.getIncheiereById(incheiere_id));
+			 all = solidarCreditorService.deletePersons(person, incheiereService.getIncheiereById(incheiere_id));
+			 all = coCreditorService.deletePersons(person, incheiereService.getIncheiereById(incheiere_id));
+			
 		if(all){
 			personsService.deletePersons(person);
 		}
